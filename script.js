@@ -91,11 +91,11 @@ console.log(document.readyState);
     function uploadFile(file) {
 
         // проверка типа файла
-        if (!['image/jpg', 'image/png', 'image/gif'].includes(file.type)) {
-            alert('Разрешены только изображения');
-            formImage.value = '';
-            return;
-        }
+        // if (!['image/jpg', 'image/JPG', 'image/png', 'image/gif'].includes(file.type)) {
+        //     alert('Разрешены только изображения');
+        //     formImage.value = '';
+        //     return;
+        // }
         // поверка размера файла
         if (file.size > 2 * 1024 * 1024) {
             alert('Файл должен быть менее 2 Мб');

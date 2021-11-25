@@ -7,6 +7,9 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+date_default_timezone_set('Etc/UTC');
+require '../vendor/autoload.php';
+
 // $mail = new PHPMailer(true);
 // $mail -> CharSet = 'UTF-8';
 // $mail -> setLanguage('ru', 'PHPMailer/language/');
@@ -19,19 +22,21 @@ require 'PHPMailer/src/SMTP.php';
 // // тема письма
 // $mail -> Subject = 'Hello, this is Kirill';
 
-$mail = new PHPMailer(true);
+$mail = new PHPMailer();
 $mail->isSMTP();                   // Отправка через SMTP
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;
 $mail -> CharSet = 'UTF-8';
 $mail -> setLanguage('ru', 'PHPMailer/language/');
 $mail->Host   = 'smtp.yandex.ru';  // Адрес SMTP сервера
 $mail->SMTPAuth   = true;          // Enable SMTP authentication
 $mail->Username   = 'Shlyonkin.K';       // ваше имя пользователя (без домена и @)
 $mail->Password   = 'uphnlbztnqzfolma';    // ваш пароль
-$mail->SMTPSecure = 'ssl';         // шифрование ssl
+//$mail->SMTPSecure = 'ssl';         // шифрование ssl
 $mail->Port   = 465;               // порт подключения
+$mail -> IsHTML();
 
 // от кого письмо
-$mail -> setFrom('Shlyonkin.K@yandex.ru', 'Kirill');
+$mail -> setFrom('Shlyonkin.K@yandex.ru', 'Kirill Shlyonkin');
 // кому
 $mail -> addAddress('kir1806@list.ru', 'Kirill Sh');
 // тема письма
@@ -91,6 +96,7 @@ if (!$mail->send()) {
 } else {
     $message = 'Data sended';
 }
+
 
 $response = ['message' => $message];
 
